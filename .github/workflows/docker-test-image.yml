@@ -3,8 +3,12 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [ "master" ]
+    tags:
+      - "v*"
   pull_request:
     branches: [ "master" ]
+    tags:
+      - "v*"
 
 jobs:
 
@@ -35,4 +39,4 @@ jobs:
           context: web/
           file: web/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-app:${{github.ref_name}}
